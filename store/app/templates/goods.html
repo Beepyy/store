@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h1>{{catalogs}}</h1>
+
+{% for good in goods %}
+
+<p><a href="{% url 'goods_descr' good.id %}">{{good}} {{good.price}}$ на складе({{good.amount}}) --- {{good.good_descr.all.first}}</a></p>
+{% empty %}
+<p>товаранету</p>
+{% endfor %}
+
+
+
+
+
+{% endblock %}

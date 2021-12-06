@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block body %}
+{% if request.user.id %}
+<h1>Hello {{request.user}}</h1>
+<ul>
+    <li>Email={{request.user.email}}</li>
+    <li>Username={{request.user.username}}</li>
+    <li>Password={{request.user.password}}</li>
+    <li>Money={{profile.money}}</li>
+</ul>
+<h3><a href="{% url 'basket' %}">Корзина</a></h3>
+<a class="users" href="{% url 'logout' %}">logout</a>
+{% else %}
+
+<h1>Вы не авторезированы</h1>
+<br>
+<a class="users" href="{% url 'register' %}">register</a>
+<a class="users" href="{% url 'login' %}">login</a>
+
+{% endif %}
+{% endblock %}

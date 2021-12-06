@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{% for i in catalogs %}
+<a href="{% url 'goods' i %}" ><p>{{i}} ({{i.good.count}})</p></a>
+{% empty %}
+<p>Каталогов нету</p>
+{% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{% for good in goods %}
+<p><a href="{% url 'goods_descr' good.id %}">{{good}} {{good.price}}$ на складе({{good.amount}}) --- {{good.good_descr.all.first}}</a></p>
+{% empty %}
+<p>Товар не найден</p>
+{% endfor %}
+
+
+
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block body %}
+{% if not request.user.is_authenticated %}
+{% load crispy_forms_tags %}
+<form action="{% url 'login' %}" method="post" class="from-group">
+{% csrf_token %}
+
+{{crispy}}
+{{form.username.label}}
+{{form.username}}
+{{form.usernmae.help_text}}
+<br>
+{{form.password.label}}
+{{form.password}}
+{{form.password.help_text}}
+
+{% if form.errors %}
+<div>Неправильная форма заполнения</div>
+<div><a href="{% url 'register' %}">register</a></div>
+{% endif %}
+<input type="submit" style="color: red; background-color: chartreuse;" value="login">
+    </form>
+{% else %}
+<h1>Вы уже авторезированы</h1>
+<p><a href="{% url 'profile' %}">Профиль</a></p>
+{% endif %}
+{% if mes %}
+<div>{{mes}}</div>
+{% endif %}
+{% endblock %}

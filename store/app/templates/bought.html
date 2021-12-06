@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{% if mes %}
+<h3>{{mes}}</h3>
+{% else %}
+<div>Ничего не проищошло</div>
+{% endif %}
+
+<p><a href="{% url 'basket' %}">В корзину</a></p>
+
+
+{% endblock %}

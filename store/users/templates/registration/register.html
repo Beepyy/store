@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+{% if not request.user.is_authenticated %}
+    {% load crispy_forms_tags %}
+    <form method="POST" class="form-group">
+	{% csrf_token %}
+	{{ form|crispy }}
+	<button type="submit" class="btn btn-success">Register</button>
+    </form>
+{% else %}
+    <h1>Сначало разлогинтесь</h1>
+<p><a href="{% url 'logout' %}">Выйти</a></p>
+{% endif %}
+{% endblock %}

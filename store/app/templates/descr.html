@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{% if good %}
+<h1>{{good.name_of_good}}</h1>
+<p>Цена - {{good.price}}$</p>
+<p>Описание : {{good.good_descr.first}}</p>
+<p>Товара на складе : {{good.amount}}</p>
+
+{% else %}
+
+<p>Товара не существует</p>
+
+{% endif %}
+
+{% if mes %}
+{{mes}}
+{% endif %}
+
+{% if request.user.is_authenticated and good.amount %}
+
+<form action="{% url 'basket_change' good.id %}" method="post">
+    {% csrf_token %}
+    <input type="number" name="add_amount" min="1" max="{{good.amount}}">
+    <input type="submit" value="В корзину">
+</form>
+{% elif request.user.is_authenticated and not good.amount %}
+<input type="number" value="" disabled="disabled">
+<input type="submit" value="В корзину" disabled="disabled">
+{% elif not request.user.is_authenticated and good.amount or not good.amount %}
+<p>Вы не авторезированы</p>
+<br>
+<a class="users" href="{% url 'login' %}">login</a>
+{% endif %}
+
+
+
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h2>Корзина:</h2>
+{% if bs %}
+{% for good in bs %}
+    
+    <p> {{good.good}} {{good.good.price}}$ на складе({{good.num_of_good}})</p>
+    <form action="{% url 'basket_change' good.good.id %}" method="post" >
+        {% csrf_token %}
+        <input type="submit" value="Убрать из корзины" name="del">
+    </form>
+
+{% endfor %}
+<p><a href="{% url 'bought' %}">Оформить</a></p>
+{% else %}
+<p>Корзина пуста</p>
+{% endif %}
+
+
+<div align="right">
+<h3>История покупок</h3>
+{% for good in bought.product.all %}
+ <div>{{good.good}} ({{good.num_of_good}}) --- {{good.full_price}}$ [1 - {{good.good.price}}$] ({{good.data_time|timesince}})</div>
+{% endfor %}
+</div>
+
+{% if mes %}
+<h3>{{mes}}</h3>
+{% endif %}
+
+<p><a href="{% url 'profile' %}">К профилю</a></p>
+
+{% endblock %}
